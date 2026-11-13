@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório do Caos 3D - LABOAS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importmap mantido para resolver os imports nos módulos JS -->
+    <script type="importmap">
+        { "imports": {
+            "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.150.1/examples/jsm/",
+            "cannon-es": "https://unpkg.com/cannon-es@0.20.0/dist/cannon-es.js"
+        }}
+    </script>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #000; font-family: 'Inter', sans-serif; }
+        #crosshair { position: absolute; top: 50%; left: 50%; width: 10px; height: 10px; background-color: rgba(255, 255, 255, 0.8); border: 2px solid rgba(0, 0, 0, 0.5); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 10; }
+        #blocker { position: absolute; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; color: white; backdrop-filter: blur(5px); }
+    </style>
+</head>
+<body>
+    <div id="crosshair"></div>
+    <div id="blocker">
+        <div id="instructions" class="text-center p-8 bg-white/10 rounded-2xl border border-white/20 shadow-2xl max-w-lg">
+            <h1 class="text-4xl font-black mb-4 text-cyan-400 drop-shadow-md">Laboratório do Caos</h1>
+            
+            <!-- Módulo 2: Configuração da Sala inserida na UI -->
+            <div id="setup-area" class="mb-6 bg-black/30 p-4 rounded-lg border border-white/10">
+                <label for="difficultySelect" class="block text-sm mb-2 text-gray-300 font-bold">Nível do Desafio:</label>
+                <select id="difficultySelect" class="w-full px-4 py-2 rounded text-black font-bold border-2 border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-300">
+                    <option value="1">Nível 1 (Alcanos Simples)</option>
+                    <option value="2">Nível 2 (Ramificados)</option>
+                    <option value="3">Nível 3 (Funções Oxigenadas)</option>
+                </select>
+                <p id="loading-status" class="text-xs text-yellow-400 mt-2 hidden">Carregando banco de dados...</p>
+            </div>
+
+            <p class="text-sm mb-6 text-gray-300">
+                <b>[W, A, S, D]</b> Mover | <b>[Shift]</b> Correr | <b>[Espaço]</b> Pular<br>
+                <b>[Clique Esq / Dir]</b> Pegar objeto | <b>[Soltar Clique]</b> Soltar
+            </p>
+            
+            <div class="flex flex-col gap-4 w-full max-w-xs mx-auto">
+                <button id="btnPlay" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+                    INICIAR SIMULAÇÃO
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ponto de entrada da aplicação modular -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
